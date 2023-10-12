@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://p.uzzle.eu">
-        <img src="/Public/res/AFlogo.png" width="188" title="Puzzleu" alt="Puzzleu">
+    <a href="https://musicing.5mode-foss.eu">
+        <img src="/Public/res/AFlogo.png" width="188" title="Musicing" alt="Musicing">
     </a>
 </p>
 
