@@ -8,7 +8,7 @@
 
 Hello and welcome to Musicing!<br>
 	  
-Musicing is a light, simple, software on premise to build and own your blog by colorful cards.<br>
+Musicing is a light, simple, software on premise to build and own your music blog.<br>
 	   
 Musicing is released under GPLv3 license, it is supplied AS-IS and we do not take any responsibility for its misusage.<br>
 	   
