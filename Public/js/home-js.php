@@ -1,5 +1,4 @@
 <?PHP
-
 /**
  * Copyright (c) 2016, 2024, 5 Mode
  * 
@@ -117,16 +116,18 @@
  function playList(playlist, allowed, onclick) {
    
    if (allowed) {  
-   
+
+      /*   
       if (onclick) {
         if ($(".play-list-img2").attr("src") ==="/res/stopicon.png") {
           stopPlayList();
           return;
         }
-      }   
+      } */  
    
       if (document.getElementById("myPlayer").readyState===0 || document.getElementById("myPlayer").ended || document.getElementById("myPlayer").paused) {
-          $(".play-list-img2").attr("src","/res/stopicon.png"); 
+          //$(".play-list-img2").attr("src","/res/stopicon.png"); 
+          $("#playListImg"+playlist).attr("src","/res/stopicon.png"); 
           curPlayF++;
           if (document.getElementsByClassName("playf"+playlist)[curPlayF]) {
              $(document.getElementsByClassName("playf"+playlist)[curPlayF]).click();
@@ -136,6 +137,15 @@
              //stopPlayList();
              curPlayF = -1;
           }
+      } else {
+      
+       if (onclick) {
+        //if ($(".play-list-img2").attr("src") ==="/res/stopicon.png") {
+          stopPlayList();
+          return;
+        //}
+       }   
+
       }
    }   
    return;
