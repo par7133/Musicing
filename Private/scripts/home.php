@@ -442,8 +442,8 @@
 
   <link rel="shortcut icon" href="/favicon.ico" />
 
-  <meta name="description" content="Welcome to Musicing! Let everyone have its colorful 'borghetto'."/>
-  <meta name="keywords" content="Musicing,on,premise,solution"/>
+  <meta name="description" content="Welcome to Musicing! Let everyone have its music blog."/>
+  <meta name="keywords" content="musicing,on,premise,solution"/>
   <meta name="robots" content="index,follow"/>
   <meta name="author" content="5 Mode"/>
   
@@ -641,7 +641,7 @@
                                    <?PHP
 
              echo($date."&nbsp;".$time."<br><br><br><br>");
-             echo("<div style='clear:both'>".$playlistName."&nbsp;&nbsp;&nbsp;<span style='position:relative;top:-4px;'><a href='#' onclick='playList(" . $iEntry ."," . ($CURRENT_VIEW == PUBLIC_VIEW?"false":"true") . ", true);event.stopPropagation();'><img class='play-list-img2' src='/res/playicon.png' style='width:24px;'></a></span></div><br><br>");                       
+             echo("<div style='clear:both'>".$playlistName."&nbsp;&nbsp;&nbsp;<span style='position:relative;top:-4px;'><a href='#' onclick='playList(" . $iEntry ."," . ($CURRENT_VIEW == PUBLIC_VIEW?"false":"true") . ", true);event.stopPropagation();'><img id='playListImg" . $iEntry . "' class='play-list-img2' src='/res/playicon.png' style='width:24px;'></a></span></div><br><br>");                       
 
              $pattern = $BLOG_PATH . DIRECTORY_SEPARATOR . $oriplaylistname . DIRECTORY_SEPARATOR . "*";
              $aSongPaths = glob($pattern);   
