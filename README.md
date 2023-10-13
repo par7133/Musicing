@@ -24,7 +24,7 @@ As you are going to run Musicing in the PHP process context, using a limited web
 <li>Set PAGINATION true or false to give more public access to your data.</li>
 </ol> 
 
-Songs nomenclature: "Playlist~Song Title.mp3"
+Song file nomenclature: "Playlist~Song Title.mp3"
 
 You can access your avatar by http://yourdomain.com/<your_avatar>. Login with the password for the admin view. Drag-n-drop all your resources in the browser window.<br>
 
