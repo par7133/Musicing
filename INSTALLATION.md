@@ -1,8 +1,8 @@
 # INSTALLATION
    
-  Installing XsltMaster is more straightforward than what it could appear..   
+  Installing Musicing is more straightforward than what it could appear..   
   
-  First, if you use Nginx as reversed proxy just point the root of your web app to /path/to/YourXsltMaster/Public   
+  First, if you use Nginx as reversed proxy just point the root of your web app to /path/to/YourMusicing/Public   
   where the public content is located:
   
   <ol>  
@@ -14,9 +14,9 @@
         listen 80;
         listen [::]:80;
     
-        server_name yourXsltMaster.com;
+        server_name yourMusicing.com;
      
-        root /var/www/YourXsltMaster/Public;
+        root /var/www/YourMusicing/Public;
         index index.php; 
        
         location / {     
@@ -53,6 +53,6 @@
   </li>
   </ol>  
   
-  Apache instead should have DocumentRoot pointing to /path/to/YourXsltMaster/Public .   
+  Apache instead should have DocumentRoot pointing to /path/to/YourMusicing/Public .   
   
   Dan
