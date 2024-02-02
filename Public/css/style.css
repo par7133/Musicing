@@ -233,6 +233,13 @@ body {
   height:482px; 
   display:none;
 }
+#fireupload {
+  position:absolute;
+  width:255px;
+  height:255px;
+  border-radius: 90%; 
+  display:none;
+}
 #footerCont {
   position: fixed; 
   top: 2000px; 
@@ -667,9 +674,11 @@ body {
   z-index:99999;
 }
 #picavatar {
-  position:absolute;
+  position:relative;
   width:255px;
   height:255px;
+  top:-4px;
+  left:-8px;
   border-radius: 90%; 
   display:none;
 }
