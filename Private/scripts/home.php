@@ -525,6 +525,11 @@
 <?PHP else: ?>          
 
   <body style="background:#dadada no-repeat; background-size: cover; background-attachment: fixed; background-position: center;">
+  
+<?php if (file_exists(APP_PATH . DIRECTORY_SEPARATOR . "jscheck.html")): ?>
+<?php include(APP_PATH . DIRECTORY_SEPARATOR . "jscheck.html"); ?> 
+<?php endif; ?>
+  
    <!--<div id="AFHint">
         <button type="button" class="close" aria-label="Close" onclick="closeMe(this);" style="position:relative; top:5px; left:-7px;">
            <span aria-hidden="true" style="color:black; font-weight:900;">&times;</span>
@@ -533,7 +538,7 @@
       <span onclick="showHowTo();"><?PHP echo(getResource0("How-to: Manage your avatars in Musicing", $lang));?></span>
       <br><br>
    </div> -->
-   <div class="header" style="margin-top:18px;margin-bottom:18px;">
+   <div id="header" class="header" style="margin-top:18px;margin-bottom:18px;">
         <div style="float:left">
              &nbsp;<a href="http://musicing.5mode-foss.eu" target="_self" style="color:#000000; text-decoration: none;">&nbsp;<img src="/res/AFlogo.png" align="middle" style="position:relative;top:-2px;width:22px;">&nbsp;Musicing</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/par7133/Musicing" style="color:#000000;"><span style="color:#119fe2">on</span> github</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:posta@elettronica.lol" style="color:#000000;"><span style="color:#119fe2">for</span> feedback</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+39-378-0812391" style="font-size:13px;background-color:#15c60b;border:2px solid #15c60b;color:#000000;height:27px;text-decoration:none;">&nbsp;&nbsp;get support&nbsp;&nbsp;</a>
              <?PHP if(($CURRENT_VIEW === PRIVATE_VIEW)): ?>
@@ -541,6 +546,14 @@
              <?PHP endif; ?>
         </div>
    </div>
+   <div id="headerMob" class="header" style="margin-top:18px;margin-bottom:18px;display:none;">
+        <div style="float:left">
+             &nbsp;<a href="http://musicing.5mode-foss.eu" target="_self" style="color:#000000; text-decoration: none;">&nbsp;<img src="/res/AFlogo.png" align="middle" style="position:relative;top:-2px;width:22px;">&nbsp;Musicing</a>
+             <?PHP if(($CURRENT_VIEW === PRIVATE_VIEW)): ?>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="adminView()" style="color:#000000;">admin mode</a>
+             <?PHP endif; ?>
+        </div>
+   </div>   
 
    <audio id="myPlayer" preload="auto">
       <source src="/media/sample.mp3" type="audio/mpeg">
