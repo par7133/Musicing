@@ -103,6 +103,15 @@
  $magicJar2 = (int)substr(strip_tags(filter_input(INPUT_POST, "txtMagicJar2")??""), 0, 1);
  $magicJar3 = (int)substr(strip_tags(filter_input(INPUT_POST, "txtMagicJar3")??""), 0, 1);
 
+  if ($CURRENT_VIEW === PUBLIC_VIEW || $CURRENT_VIEW === PRIVATE_VIEW ) {
+     $MAXP = (int)substr(strip_tags(filter_input(INPUT_POST, "_MAXP")??""), 0, 2);
+     if ($MAXP === 0) {
+        $MAXP = (int)substr(strip_tags(filter_input(INPUT_GET, "maxp")??""), 0, 2);
+     }   
+     if ($MAXP === 0) {
+       $MAXP = APP_BLOG_MAX_POSTS;
+     }  
+ } 
  
  function uploadNewRes() {
 
@@ -437,6 +446,34 @@
 
   <link rel="shortcut icon" href="/favicon.ico" />
 
+<?PHP if ($CURRENT_VIEW == PUBLIC_VIEW || $CURRENT_VIEW == PRIVATE_VIEW): ?> 
+ <script>
+ function renderCorrectPag () {
+      if (window.innerWidth <= 500) {
+         if (<?PHP echo($MAXP) ?>!=<?PHP echo(APP_BLOG_ULTRATHIN_MAX_POSTS) ?>) {
+             window.open("http://<?php echo $_SERVER['HTTP_HOST'];?>/<?php echo(AVATAR_NAME);?>/?maxp=<?PHP echo(APP_BLOG_ULTRATHIN_MAX_POSTS) ?>","_self");
+          }   
+      } else if (window.innerWidth <= 1050) {
+          if (<?PHP echo($MAXP) ?>!=<?PHP echo(APP_BLOG_THIN_MAX_POSTS) ?>) {
+             window.open("http://<?php echo $_SERVER['HTTP_HOST'];?>/<?php echo(AVATAR_NAME);?>/?maxp=<?PHP echo(APP_BLOG_THIN_MAX_POSTS) ?>","_self");
+          }  
+      } else {
+          if (<?PHP echo($MAXP) ?>!=<?PHP echo(APP_BLOG_MAX_POSTS) ?>) {
+             window.open("http://<?php echo $_SERVER['HTTP_HOST'];?>/<?php echo(AVATAR_NAME);?>/?maxp=<?PHP echo(APP_BLOG_MAX_POSTS) ?>","_self");
+          }  
+      }
+ }
+ 
+  window.addEventListener("load", function() {
+     renderCorrectPag();
+  }, false);
+  
+  window.addEventListener("resize", function() {
+     renderCorrectPag();
+  }, false);
+ </script>
+<?PHP endif; ?>
+
   <meta name="description" content="Welcome to Musicing! Let everyone have its music blog."/>
   <meta name="keywords" content="musicing,on,premise,solution"/>
   <meta name="robots" content="index,follow"/>
@@ -520,7 +557,7 @@
  </form>   
            
   <div id="footerCont">&nbsp;</div>
-  <div id="footer"><span style="background:#FFFFFF; opacity:0.7;">&nbsp;&nbsp;<a class="aaa" href="https://5mode.com/dd.html">Disclaimer</a>.&nbsp;&nbsp;A <a href="http://5mode.com" class="aaa">5 Mode</a> project and <a href="http://demo.5mode.com" class="aaa">WYSIWYG</a> system. <?PHP echo(getResource0("Some rights reserved", $lang));?></span></div>
+  <div id="footer"><span style="background:#FFFFFF; opacity:0.7;">&nbsp;&nbsp;<a class="aaa" href="dd.html">Disclaimer</a>.&nbsp;&nbsp;A <a href="http://5mode.com" class="aaa">5 Mode</a> project and <a href="http://demo.5mode.com" class="aaa">WYSIWYG</a> system. <?PHP echo(getResource0("Some rights reserved", $lang));?></span></div>
            
 <?PHP else: ?>          
 
@@ -591,23 +628,23 @@
       
       // PAGINATION
 
-      $totPages = (int)(count($aPlaylistPaths)/APP_BLOG_MAX_POSTS); 
-      if ($totPages < (count($aPlaylistPaths)/APP_BLOG_MAX_POSTS)) {
+      $totPages = (int)(count($aPlaylistPaths)/$MAXP); 
+      if ($totPages < (count($aPlaylistPaths)/$MAXP)) {
         $totPages++;
       }
       $firstPost = 0;
-      $prevPost = $blogSP - APP_BLOG_MAX_POSTS;
+      $prevPost = $blogSP - $MAXP;
       if ($prevPost < 0) {
         $prevPost = 0;
       }    
-      $nextPost = $blogSP + APP_BLOG_MAX_POSTS;
-      if ($nextPost > (($totPages - 1) * APP_BLOG_MAX_POSTS)) {
-        $nextPost = (($totPages - 1) * APP_BLOG_MAX_POSTS);
+      $nextPost = $blogSP + $MAXP;
+      if ($nextPost > (($totPages - 1) * $MAXP)) {
+        $nextPost = (($totPages - 1) * $MAXP);
       }
       if ($nextPost < 0) {
         $nextPost = 0;
       }       
-      $lastPost = (($totPages - 1) * APP_BLOG_MAX_POSTS);
+      $lastPost = (($totPages - 1) * $MAXP);
       if ($lastPost < 0) {
         $lastPost = 0;
       }    
@@ -620,14 +657,14 @@
           $iCurEntry++;
           continue;
         }  
-        if ($iEntry>APP_BLOG_MAX_POSTS) {
+        if ($iEntry>$MAXP) {
           break;
         }
         $oriplaylistname = basename($playlistPath);
         $date = explode("-",$oriplaylistname)[0];
         $time = explode("-",$oriplaylistname)[1];
         $time = left($time,2) . ":" . substr($time,2,2);
-        if ($iEntry === count($aPlaylistPaths) || $iEntry==APP_BLOG_MAX_POSTS) {
+        if ($iEntry === count($aPlaylistPaths) || $iEntry==$MAXP) {
           $marginbottom = "0px";
         } else {
           $marginbottom = "5px";
@@ -644,11 +681,22 @@
                                    <?php elseif ($iEntry===1 && $iCurEntry>1): ?>  
                                    <div style="float:right;position: absolute;left:+1%; opacity:0.85;"><a href="/<?PHP echo(AVATAR_NAME); ?>/?blogSP=<?PHP echo($prevPost);?>" onclick="event.stopPropagation();"><img class="blog-img" src="/res/arrow-left.png" style="float:left;"></a></div>
                                    <?php endif; ?>
-                                   <?php if ($iEntry===APP_BLOG_MAX_POSTS && $iCurEntry===$totPlaylist): ?>
+                                   <?php if ($iEntry===$MAXP && $iCurEntry===$totPlaylist): ?>
                                    <!--<img class="blog-img" src="/res/arrow-rightd.png" style="float:right;">-->
-                                   <?php elseif ($iEntry===APP_BLOG_MAX_POSTS): ?>
-                                   <div style="float:right;position: absolute;left:+92%; opacity:0.85;"><a href="/<?PHP echo(AVATAR_NAME); ?>/?blogSP=<?PHP echo($nextPost);?>" onclick="event.stopPropagation();"><img class="blog-img" src="/res/arrow-right.png" style="float:right;"></a></div>
-                                   <?php endif; ?>
+                                   
+                                    <?php elseif ($iEntry===$MAXP): ?>
+                                          <?PHP if ($MAXP===APP_BLOG_ULTRATHIN_MAX_POSTS): ?> 
+                                            <div style="float:right;position: absolute;left:+65%; opacity:0.85;"><a href="/<?PHP echo(AVATAR_NAME); ?>/?blogSP=<?PHP echo($nextPost);?>&maxp=<?PHP echo($MAXP)?>" onclick="event.stopPropagation();"><img class="blog-img" src="/res/arrow-right.png" style="float:right;"></a></div>
+                                          <?PHP elseif ($MAXP===APP_BLOG_THIN_MAX_POSTS): ?>   
+                                            <div style="float:right;position: absolute;left:+82%; opacity:0.85;"><a href="/<?PHP echo(AVATAR_NAME); ?>/?blogSP=<?PHP echo($nextPost);?>&maxp=<?PHP echo($MAXP)?>" onclick="event.stopPropagation();"><img class="blog-img" src="/res/arrow-right.png" style="float:right;"></a></div>                                          
+                                          <?PHP else: ?>                                            
+                                            <div style="float:right;position: absolute;left:+92%; opacity:0.85;"><a href="/<?PHP echo(AVATAR_NAME); ?>/?blogSP=<?PHP echo($nextPost);?>&maxp=<?PHP echo($MAXP)?>" onclick="event.stopPropagation();"><img class="blog-img" src="/res/arrow-right.png" style="float:right;"></a></div>
+                                          <?php endif; ?>  
+                                     <?php endif; ?>
+                              <?PHP else: ?>
+                                    &nbsp;
+                              <?PHP endif; ?>                                       
+                              
                                    <div id="mydivzero">&nbsp;</div>
                                    <?PHP
 
@@ -685,10 +733,9 @@
    
                       <?PHP } ?>                      
                                                       
-                 <?PHP EndIf; ?>
                 </div> 
              </div>   
-                                                      
+
          <?PHP 
     $totLinks = $iEntry;          
     $iEntry++;          
@@ -697,7 +744,7 @@
    
       <?PHP endif; ?>
 
-    <?PHP for($i=$iEntry;$i<=APP_BLOG_MAX_POSTS;$i++):?>
+    <?PHP for($i=$iEntry;$i<=$MAXP;$i++):?>
             <div class="blog-content"> 
              <div class="blog-entry" style="border:0px;">  
                  &nbsp;
@@ -705,14 +752,14 @@
             </div>   
    <?PHP endfor; ?>
    
-   <?PHP if ((APP_BLOG_MAX_POSTS / 3) > (int)(APP_BLOG_MAX_POSTS / 3)): ?>
+   <?PHP if (($MAXP / 3) > (int)($MAXP / 3)): ?>
             <div class="blog-content"> 
              <div class="blog-entry" style="border:0px;">  
                  &nbsp;
              </div> 
             </div>   
    
-           <?PHP if (((APP_BLOG_MAX_POSTS+1) / 3) > (int)((APP_BLOG_MAX_POSTS+1) / 3)): ?>
+           <?PHP if ((($MAXP+1) / 3) > (int)(($MAXP+1) / 3)): ?>
                  <div class="blog-content"> 
                   <div class="blog-entry" style="border:0px;">  
                       &nbsp;
@@ -1086,6 +1133,7 @@
  </div> 
 
  <input type="hidden" id="_reqView" name="_reqView" value="<?PHP echo($reqView);?>">                     
+ <input type="hidden" id="_MAXP" name="_MAXP" value="<?PHP echo($MAXP);?>">                     
                     
  </form>       
      
@@ -1103,7 +1151,7 @@
            
  <?PHP endif; ?>           
 
-<script src="/js/home-js.php?hl=<?PHP echo($lang);?>&av=<?PHP echo(AVATAR_NAME);?>&cv=<?PHP echo($CURRENT_VIEW);?>&cu=<?PHP echo($CUDOZ);?>" type="text/javascript"></script>
+<script src="/static/js/home-js.php?hl=<?PHP echo($lang);?>&av=<?PHP echo(AVATAR_NAME);?>&cv=<?PHP echo($CURRENT_VIEW);?>&cu=<?PHP echo($CUDOZ);?>" type="text/javascript"></script>
 
 <?PHP if ($CURRENT_VIEW !== ADMIN_VIEW): ?> 
 <script>
@@ -1223,8 +1271,8 @@
     pich = parseInt((h - $(".header").height() - 80) / 3);
     // picw = parseInt(w / 5); ori
     
-    iimg = parseInt(<?PHP echo(APP_BLOG_MAX_POSTS / 3); ?>);
-    if ((<?PHP echo(APP_BLOG_MAX_POSTS / 3); ?>) > parseInt(<?PHP echo(APP_BLOG_MAX_POSTS / 3); ?>)) {
+    iimg = parseInt(<?PHP echo($MAXP / 3); ?>);
+    if ((<?PHP echo($MAXP / 3); ?>) > parseInt(<?PHP echo($MAXP / 3); ?>)) {
       iimg++;
     }  
     picw = parseInt(w / iimg);
@@ -1234,7 +1282,7 @@
     $(".blog-entry").css("width", (picw-2) + "px");
     $(".blog-img").css("height", (pich-4) + "px");   
     $(".blog-img").css("width", ((picw-4)/3) + "px");   
-    if (w > 900) {
+    if (w > 0) {
       ii = 1;
       $(".blog-entry").each(function() {
 
@@ -1245,7 +1293,7 @@
           $(this).css("background-repeat", "no-repeat");
           $(this).css("background-position", "top 10px right 10px");
           $(this).css("background-size", "50px");
-        } else if (ii > <?PHP echo($totLinks); ?> && ii < 15) {
+        } else if (ii > <?PHP echo($totLinks); ?> && ii < <?PHP echo($MAXP); ?>) {
           //$(this).css("background-image", "url('/res/notation.png')");
           //$(this).css("background-repeat", "repeat");
           //$(this).css("background-position", "");
@@ -1253,7 +1301,7 @@
           $(this).css("background", "transparent");
           $(this).css("background-repeat", "");
           $(this).css("background-position", "");          
-        } else if (ii === 15 && ss === "&nbsp;") {
+        } else if (ii === <?PHP echo($MAXP); ?> && ss === "&nbsp;") {
           $(this).css("background-image", "url('/res/musicbot.png')");
           $(this).css("background-repeat", "no-repeat");
           $(this).css("background-position", "");
