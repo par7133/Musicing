@@ -77,6 +77,8 @@ define('APP_DEF_LANG', "en-US");
 define('APP_DEF_PROFILE_PIC', "/res/pic1.png");
 define('APP_FILE_MAX_SIZE', 10496000);
 define('APP_BLOG_MAX_POSTS', 15);
+define('APP_BLOG_THIN_MAX_POSTS', 6);
+define('APP_BLOG_ULTRATHIN_MAX_POSTS', 3);
 define('APP_PAGINATION', false);
 define('APP_EMAIL_CONTACT', "info@yourmusicing.com");
 define('APP_CARD_BGCOLORS', ['#e74c57','#e74c3c','#d35400','#f39c12','#f1c40f','#2ecc71','#1abc9c','#3498db','#154360','#1d3347','#512e5f','#8e44ad','#424344','#000205','#FFFFFF']);
@@ -130,6 +132,8 @@ LICENSETEXT
       'DEF_PROFILE_PIC' => "/res/pic1.png", 
       'FILE_MAX_SIZE' => 10496000,
       'BLOG_MAX_POSTS' => 15,
+      'BLOG_THIN_MAX_POSTS' => 6,
+      'BLOG_ULTRATHIN_MAX_POSTS' => 3,            
       'PAGINATION' => false,
       'EMAIL_CONTACT' => "info@yourmusicing.com",
       'CARD_BGCOLORS' => ['#e74c57','#e74c3c','#d35400','#f39c12','#f1c40f','#2ecc71','#1abc9c','#3498db','#154360','#1d3347','#512e5f','#8e44ad','#424344','#000205','#FFFFFF'],
