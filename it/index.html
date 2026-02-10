@@ -98,9 +98,9 @@
 </head>
 <body style="background:#0d0d0d;">
 
-<div id="langhideit">
+<div id="langhideen">
    <br>
-   &nbsp;We have detected that you maybe speak Italian, do you want to be redirected to the italian site? <button onclick="$('#langhideit').hide();">NO</button>&nbsp;<button onclick="window.open('https://musicing.numode-foss.eu/it','_self');">OK</button>
+   &nbsp;We have detected that you maybe speak English, do you want to be redirected to the english site? <button onclick="$('#langhideen').hide();">NO</button>&nbsp;<button onclick="window.open('https://musicing.numode-foss.eu','_self');">OK</button>
    <br><br>
 </div>
 
@@ -140,28 +140,28 @@
         <span aria-hidden="true">&times;</span>
      </button>
 	
-	   Hello and welcome to Musicing!<br><br>
-	   
-	   Musicing is a light, simple, software on premise to build and own your music blog.<br><br>
-	   
-	   Musicing is released under GPLv3 license, it is supplied AS-IS and we do not take any responsibility for its misusage.<br><br>
-	   
-     First step, use the password box and salt fields to create the hash to insert in the config file. Remember to manually set there also the salt value.<br><br>
-	   
-	   As you are going to run Musicing in the PHP process context, using a limited web server or phpfpm user, you must follow some simple directives for an optimal first setup:<br>
-	   <ol>
-	   <li>Check the write permissions of your "data" folder in your web app Private path; and set its path in the config file.</li>
-     <li>Set the default Locale.</li>
-     <li>Set FILE_MAX_SIZE (remember that some PHP settings could limit the upload behaviour of Musicing too)</li>
-     <li>Set BLOG_MAX_POSTS to limit the number of visible posts in the blog.</li>	  
-     <li>Set PAGINATION true or false to give more public access to your data.</li>
-	   </ol>
-         
-	   <br>	
-		
-     You can access your avatar by http://yourservername.xyz/&lt;your_avatar&gt;. Login with the password for the admin view. Drag-n-drop all your resources in the browser window.<br><br>
-		
-		 Song file nomenclature: "Playlist~Song Title.mp3".<br><br> 
+Ciao e benvenuto su Musicing!<br><br> 
+
+Musicing è un software on-premise leggero e semplice per creare e gestire il tuo blog musicale.<br><br> 
+
+La musica è rilasciata sotto licenza GPLv3, viene fornita AS-IS e non ci assumiamo alcuna responsabilità per il suo uso improprio.<br><br> 
+
+Primo passaggio, utilizzare la casella della password e i campi salt per creare l'hash da inserire nel file di configurazione. Ricordati di impostare manualmente lì anche il valore del sale.<br><br> 
+
+Poiché eseguirai Musicing nel contesto del processo PHP, utilizzando un server Web limitato o un utente phpfpm, devi seguire alcune semplici direttive per una prima configurazione ottimale:<br> 
+<ol> 
+<li>Verifica i permessi di scrittura della tua cartella "dati" nel percorso privato della tua web app; e imposta il suo percorso nel file di configurazione.</li> 
+<li>Imposta la lingua predefinita.</li> 
+<li>Imposta FILE_MAX_SIZE (ricorda che alcune impostazioni PHP potrebbero limitare anche il comportamento di caricamento di Musicing)</li> 
+<li>Imposta BLOG_MAX_POSTS per limitare il numero di post visibili nel blog.</li> 
+<li>Imposta PAGINATION su true o false per garantire un maggiore accesso pubblico ai tuoi dati.</li> 
+</ol> 
+
+<br> 
+
+Puoi accedere al tuo avatar da http://yourservername.xyz/&lt;your_avatar&gt;. Accedi con la password per la vista amministratore. Trascina tutte le tue risorse nella finestra del browser.<br><br> 
+
+Nomenclatura del file del brano: "Playlist~Titolo del brano.mp3".<br><br>
 
 	   Screenshot:<br><br>																														   
 		
@@ -217,12 +217,12 @@ setFooterPos2();
 </script>  
 
 <script>
-    function isItalian() {
+    function isEnglish() {
       ret = false;
       lang = window.navigator.language;
       lang = lang.toLowerCase();
       //alert(lang);
-      if (lang === "it" || lang === "it-it" || lang === "italian") {
+      if (lang === "en" || lang === "en-us" || lang === "en-gb" || lang === "english") {
         ret = true;
       }
       return ret;
@@ -238,8 +238,8 @@ setFooterPos2();
       return ret;
     }
 
-    if (isItalian()) {
-      $("#langhideit").show();
+    if (isEnglish()) {
+      $("#langhideen").show();
     }
 
     if (isChinese()) {
