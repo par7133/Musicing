@@ -26,7 +26,7 @@ As you are going to run Musicing in the PHP process context, using a limited web
 
 Song file nomenclature: "Playlist~Song Title.mp3"
 
-You can access your avatar by http://yourdomain.com/<your_avatar>. Login with the password for the admin view. Drag-n-drop all your resources in the browser window.<br>
+You can access your avatar by http://yourservername.xyz/<your_avatar>. Login with the password for the admin view. Drag-n-drop all your resources in the browser window.<br>
 
 For any need of software additions, plugins and improvements please write to <a href="mailto:info@numode.eu">info@numode.eu</a>  
 
